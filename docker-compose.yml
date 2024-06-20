@@ -7,3 +7,10 @@ services:
       - .:/app
     ports:
       - 53000:3000
+    env_file:
+      - ./.env
+
+networks:
+  default:
+    name: go_app
+    external: true

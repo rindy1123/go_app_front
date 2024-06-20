@@ -1,5 +1,5 @@
-import { apiClient } from "@/api_client/api";
-import { TODO_POST_API, TodoPostRequest, TodoPostResponse } from "@/api_client/todos/post";
+import { apiClient } from "@/api_client";
+import { Button, Input } from "@nextui-org/react";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
@@ -10,34 +10,24 @@ export default async function New() {
     // TODO: form data type
     const rawFormData = Object.fromEntries(formData);
     const title = rawFormData.title as string
-    const status = 'todo' as const
-    const body = { title, status }
-    await apiClient<TodoPostResponse, TodoPostRequest>({ ...TODO_POST_API, body })
+    if (!title) return
+
+    await apiClient.todos.post({ title, status: 'todo' })
     revalidatePath('/todos')
     redirect('/todos')
   }
 
   return (
     <>
-      <form action={create}>
-        <div className="flex justify-center w-80 ml-4 mt-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2 mr-2" htmlFor="title">
-            Title
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="title"
-            name="title"
+      <form action={create} className="flex flex-row ml-4 mt-4">
+        <div className="flex justify-center w-80">
+          <Input
             type="text"
-            placeholder="Title"
+            label="Title"
+            name="title"
           />
         </div>
-        <button
-          type="submit"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        >
-          Create
-        </button>
+        <Button type="submit" className="ml-4" color="primary">Create</Button>
       </form>
     </>
   );

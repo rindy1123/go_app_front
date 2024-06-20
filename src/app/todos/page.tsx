@@ -1,34 +1,32 @@
-import { apiClient } from "@/api_client/api"
-import { TODO_INDEX_API, TodoIndexResponse } from "@/api_client/todos";
-import Link from "next/link";
-
-export const revalidate = 30
+import { CheckboxGroup, Link } from "@nextui-org/react";
+import TodoCheckbox from "./components/checkbox";
+import { apiClient } from "@/api_client";
 
 export default async function Index() {
-  const { todos } = await apiClient<TodoIndexResponse>(TODO_INDEX_API)
+  const { todos } = await apiClient.todos.list()
 
   return (
-    <>
-      <div className="flex justify-end mt-5 mr-5">
+    <div className="ml-5">
+      <div className="flex justify-start mt-5">
         <Link
           href="/todos/new"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          color="primary"
         >
           Create
         </Link>
       </div>
 
-      <div className="flex justify-center">
+      <div className="mt-8">
         {todos.length === 0 ? (
           <div>No todos</div>
         ) : (
-          <div>
+          <CheckboxGroup label="TODO">
             {todos.map(todo => (
-              <div key={todo.id}>{todo.status}: {todo.title}</div>
+              <TodoCheckbox key={todo.id} id={todo.id} status={todo.status} title={todo.title} />
             ))}
-          </div>
+          </CheckboxGroup>
         )}
       </div>
-    </>
+    </div>
   );
 }

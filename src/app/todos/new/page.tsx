@@ -3,13 +3,15 @@ import { Button, Input } from "@nextui-org/react";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
+interface RawFormData {
+  title: string;
+}
+
 export default async function New() {
   const create = async (formData: FormData) => {
     'use server'
 
-    // TODO: form data type
-    const rawFormData = Object.fromEntries(formData);
-    const title = rawFormData.title as string
+    const { title } = Object.fromEntries(formData) as unknown as RawFormData;
     if (!title) return
 
     await apiClient.todos.post({ title, status: 'todo' })

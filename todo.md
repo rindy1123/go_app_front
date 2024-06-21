@@ -1,3 +1,3 @@
-- Form type
+- API client error handling
 - Lint
 - deploy

@@ -1,3 +1,2 @@
-- API client error handling
 - Lint
 - deploy

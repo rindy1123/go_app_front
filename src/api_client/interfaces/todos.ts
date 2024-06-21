@@ -1,4 +1,4 @@
-import { TodoStatus } from "@/type";
+import { TodoStatus } from '@/type';
 
 interface Todo {
   id: string;
@@ -7,12 +7,12 @@ interface Todo {
 }
 
 export interface TodoListResponse {
-  todos: Todo[]
+  todos: Todo[];
 }
 
 export interface TodoPostRequest {
   title: Todo['title'];
-  status: Todo['status']
+  status: Todo['status'];
 }
 
 export interface TodoPostResponse {
@@ -21,7 +21,7 @@ export interface TodoPostResponse {
 
 export interface TodoPutRequest {
   title: Todo['title'];
-  status: Todo['status']
+  status: Todo['status'];
 }
 
-export type TodoPutResponse = Todo
+export type TodoPutResponse = Todo;

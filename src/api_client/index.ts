@@ -10,6 +10,7 @@ export const apiClient = {
     list: async () => request<TodoListResponse>({ path: paths.todos, method: 'GET' }),
     post: async (body: TodoPostRequest) => request<TodoPostResponse, TodoPostRequest>({ path: paths.todos, method: 'POST', body }),
     put: async (id: string, body: TodoPutRequest) => request<TodoPutResponse, TodoPutRequest>({ path: `${paths.todos}/${id}`, method: 'PUT', body }),
+    delete: async (id: string) => request<void>({ path: `${paths.todos}/${id}`, method: 'DELETE' }),
   }
 }
 

@@ -1,16 +1,24 @@
 'use client'
+
 import { TodoStatus } from "@/type";
-import { Checkbox } from "@nextui-org/react";
+import { Button, Checkbox } from "@nextui-org/react";
+import { deleteTodo, updateTodo } from "./actions";
 
 export default function TodoCheckbox({ id, status, title }: { id: string, status: TodoStatus, title: string }) {
-  const onValueChange = async (isSelected: boolean) => {
-    const status = isSelected ? 'done' : 'todo'
-    console.log(status)
+  const onChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    await updateTodo({ id, title, status: e.target.checked ? 'done' : 'todo' })
+  }
+
+  const onClick = async () => {
+    await deleteTodo({ id })
   }
 
   return (
-    <Checkbox value={id} isSelected={status === 'done'} onValueChange={onValueChange}>
-      {title}
-    </Checkbox>
+    <div className="flex flex-row gap-x-3">
+      <Checkbox value={id} defaultSelected={status === 'done'} onChange={onChange}>
+        {title}
+      </Checkbox>
+      <Button color="danger" onClick={onClick}>Delete</Button>
+    </div>
   );
 }

@@ -1,4 +1,4 @@
-import { CheckboxGroup, Link } from "@nextui-org/react";
+import { Link } from "@nextui-org/react";
 import TodoCheckbox from "./components/checkbox";
 import { apiClient } from "@/api_client";
 
@@ -20,12 +20,13 @@ export default async function Index() {
         {todos.length === 0 ? (
           <div>No todos</div>
         ) : (
-          <CheckboxGroup label="TODO">
+          <div className="flex flex-col gap-y-4">
             {todos.map(todo => (
               <TodoCheckbox key={todo.id} id={todo.id} status={todo.status} title={todo.title} />
             ))}
-          </CheckboxGroup>
+          </div>
         )}
+
       </div>
     </div>
   );

@@ -1,4 +1,3 @@
-- Update and delete
 - Form type
 - Lint
 - deploy

@@ -29,7 +29,10 @@ export const request = async <Response = void, Request = undefined>({
 };
 
 const get = async <Response>(path: string): Promise<Response> => {
-  const res = await fetch(`${env.API_ENDPOINT}/${path}`, { method: 'GET' });
+  const res = await fetch(`${env.API_ENDPOINT}/${path}`, {
+    method: 'GET',
+    cache: 'no-store',
+  });
   return res.json();
 };
 

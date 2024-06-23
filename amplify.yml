@@ -7,7 +7,6 @@ frontend:
         - pnpm i
     build:
       commands:
-        - env | grep -e API_ENDPOINT | echo
         - env | grep -e API_ENDPOINT >> .env.production
         - pnpm run build
   artifacts:
